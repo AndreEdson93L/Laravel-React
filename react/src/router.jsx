@@ -7,6 +7,7 @@ import NotFound from "./views/NotFound";
 import Signup from "./views/Signup";
 import Users from "./views/Users";
 import UserForm from "./views/UserForm";
+import NewsList from "./views/NewsList.jsx";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: '/users/:id',
         element: <UserForm key="userUpdate" />
+      },
+      {
+        path: '/news',
+        element: <NewsList />,
       }
     ]
   },
