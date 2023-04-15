@@ -21,7 +21,7 @@ const NewsList = () => {
 
   return (
     <div>
-      <h1>News</h1>
+      <h1>Business News</h1>
       <ul>
         {news.map((article, index) => (
           <li key={index}>

@@ -9,6 +9,7 @@ import Users from "./views/Users";
 import UserForm from "./views/UserForm";
 import NewsList from "./views/NewsList.jsx";
 import GuardiansNewsList from "./views/GuardiansNewsList.jsx";
+import TechnologyNewsList from "./views/TechnologyNewList.jsx";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
         path: "/guardian-news",
         element: <GuardiansNewsList />,
       },
+      {
+        path: "/technology-news",
+        element: <TechnologyNewsList />,
+      }
     ],
   },
   {
