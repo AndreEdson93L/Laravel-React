@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GuardianNewsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
 
@@ -18,3 +19,4 @@ use App\Http\Controllers\NewsController;
 
 // Add the following route for the fetchNews method
 Route::get('/fetch-news', [NewsController::class, 'fetchNews']);
+Route::get('/fetch-guardians-news', [GuardianNewsController::class, 'fetchGuardiansNews']);
