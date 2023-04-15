@@ -17,7 +17,7 @@ class NewsController extends Controller
         $response = $client->get($url);
         $data = json_decode($response->getBody(), true);
 
-        dd($data);
+        //dd($data);
 
         // Iterate over each article and store it in the database
         foreach ($data['articles'] as $article) {
@@ -33,5 +33,7 @@ class NewsController extends Controller
                 'content' => $article['content'],
             ]);
         }
+
+        return response()->json($data);
     }
 }
