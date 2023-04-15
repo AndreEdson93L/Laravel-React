@@ -1,22 +1,10 @@
 // components/NewsList.jsx
 
 import React, { useEffect, useState } from "react";
-import axios from "../axios-client"; // Make sure to import your axios instance
+import axios from "../axios-client"; 
 
 const NewsList = () => {
   const [news, setNews] = useState([]);
-
-  const [search, setSearch] = useState("");
-  const [filters, setFilters] = useState({
-    date: "",
-    category: "",
-    source: "",
-  });
-  const [preferences, setPreferences] = useState({
-    sources: [],
-    categories: [],
-    authors: [],
-  });
 
   useEffect(() => {
     const fetchNews = async () => {

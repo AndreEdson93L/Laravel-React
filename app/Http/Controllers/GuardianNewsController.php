@@ -17,8 +17,6 @@ class GuardianNewsController extends Controller
         $response = $client->get($url);
         $data = json_decode($response->getBody(), true);
 
-        dd($data);
-
         // Iterate over each article and store it in the database
         foreach ($data['response']['results'] as $article) {
             GuardianNews::create([
@@ -34,5 +32,7 @@ class GuardianNewsController extends Controller
                 'pillar_name' => $article['pillarName'] ?? null,
             ]);
         }
+
+        return response()->json($data); // Return the data as JSON
     }
 }
