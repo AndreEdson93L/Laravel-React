@@ -1,25 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\NewsApi;
 
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
 use App\Models\News;
 
-class NewsTechnology extends Controller
+class NewsController extends Controller
 {
-    public function fetchTechnologyNews(Request $request)
+    public function fetchNews()
     {
         $client = new Client();
         $apiKey = '00d3b42d7c444ec9bd4f6577e4aa6b59';
-        $url = "https://newsapi.org/v2/top-headlines?country=de&category=technology&apiKey={$apiKey}";
-
-        $keyword = $request->input('keyword');
-
-        if (!empty($keyword)) {
-            $url .= "&q=" . urlencode($keyword);
-        }
+        $url = "https://newsapi.org/v2/top-headlines?country=de&category=business&apiKey={$apiKey}";
 
         $response = $client->get($url);
         $data = json_decode($response->getBody(), true);
@@ -28,9 +21,6 @@ class NewsTechnology extends Controller
 
         // Iterate over each article and store it in the database
         foreach ($data['articles'] as $article) {
-             // Truncate the 'url_to_image' value to a maximum of 2047 characters
-             $truncatedUrlToImage = Str::limit($article['urlToImage'], 2047);
-
             News::create([
                 'source_id' => $article['source']['id'],
                 'source_name' => $article['source']['name'],
@@ -38,7 +28,7 @@ class NewsTechnology extends Controller
                 'title' => $article['title'],
                 'description' => $article['description'],
                 'url' => $article['url'],
-                'url_to_image' => $truncatedUrlToImage,
+                'url_to_image' => $article['urlToImage'],
                 'published_at' => $article['publishedAt'],
                 'content' => $article['content'],
             ]);

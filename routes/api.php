@@ -4,9 +4,9 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\GuardianNewsController;
-use App\Http\Controllers\NewsBusiness;
-use App\Http\Controllers\NewsTechnology;
+use App\Http\Controllers\NewsApi\GuardianNewsController;
+use App\Http\Controllers\NewsApi\NewsBusiness;
+use App\Http\Controllers\NewsApi\NewsTechnology;
 
 /*
 |--------------------------------------------------------------------------
