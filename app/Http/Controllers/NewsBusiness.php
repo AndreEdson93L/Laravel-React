@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use DateTimeZone;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use App\Models\News;
-use Nette\Utils\DateTime;
 use Illuminate\Support\Str;
 
 class NewsBusiness extends Controller

@@ -4,24 +4,42 @@ import axios from "../axios-client";
 
 const TechnologyNewsList = () => {
   const [technologyNews, setTechnologyNews] = useState([]);
+  const [keyword, setKeyword] = useState("");
 
-  useEffect(() => {
     const fetchTechnologyNews = async () => {
       try {
-        const response = await axios.get("/fetch-technology-news");
-        console.log("Response from backend:", response);
+        const response = await axios.get("/fetch-technology-news",
+        {
+          params: {
+            keyword: keyword.trim() === "" ? null : keyword
+          },
+        });
         setTechnologyNews(response.data.articles);
       } catch (error) {
         console.error("Error fetching technology news:", error);
       }
     };
 
-    fetchTechnologyNews();
-  }, []);
+    useEffect(() => {
+      fetchTechnologyNews();
+    }, []);
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      fetchTechnologyNews();
+    };
 
   return (
     <div>
       <h1>Technology News</h1>
+      <form onSubmit={handleSubmit}><input
+          type="text"
+          placeholder="Search by keyword"
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+        />
+        <button type="submit">Search</button>
+      </form>
       <ul>
         {technologyNews.map((article, index) => (
           <li key={index}>

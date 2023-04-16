@@ -13,12 +13,10 @@ const NewsList = () => {
         },
       });
       setNews(response.data.articles);
-      console.log("Fetched news:", response.data.articles);
     } catch (error) {
       console.error("Error fetching news:", error);
     }
   };
-  
 
   useEffect(() => {
     fetchNews();
