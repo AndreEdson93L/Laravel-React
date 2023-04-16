@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "../axios-client";
+import SearchBar from "../components/SearchBar";
 
 const ScienceNewsList = () => {
   const [news, setScienceNews] = useState([]);
@@ -8,6 +9,7 @@ const ScienceNewsList = () => {
   const fetchScienceNews = async () => {
     try {
       const response = await axios.get("/fetch-science-news", {
+        //I would like to not have to repeat this logic
         params: {
           keyword: keyword.trim() === "" ? null : keyword
         },
@@ -20,25 +22,16 @@ const ScienceNewsList = () => {
 
   useEffect(() => {
     fetchScienceNews();
-  }, []); // Remove the dependencies to only fetch on mount
+  }, [keyword]); // Add keyword as a dependency to refetch news when keyword changes
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    fetchScienceNews();
+  const handleSearch = (searchKeyword) => {
+    setKeyword(searchKeyword);
   };
 
   return (
     <div>
       <h1>Science News</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Search by keyword"
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
-        />
-        <button type="submit">Search</button>
-      </form>
+      <SearchBar onSubmit={handleSearch} />
       <ul>
         {news.map((article, index) => (
           <li key={index}>

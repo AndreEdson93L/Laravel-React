@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "../axios-client";
+import SearchBar from "../components/SearchBar";
 
 const SportNewsList = () => {
   const [news, setSportNews] = useState([]);
-  const [keyword, setKeyword] = useState("");
 
-  const fetchSportNews = async () => {
+  const fetchSportNews = async (keyword = "") => {
     try {
       const response = await axios.get("/fetch-sport-news", {
         params: {
-          keyword: keyword.trim() === "" ? null : keyword
+          keyword: keyword.trim() === "" ? null : keyword,
         },
       });
       setSportNews(response.data.articles);
@@ -20,25 +20,16 @@ const SportNewsList = () => {
 
   useEffect(() => {
     fetchSportNews();
-  }, []); // Remove the dependencies to only fetch on mount
+  }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    fetchSportNews();
+  const handleSearchSubmit = (searchKeyword) => {
+    fetchSportNews(searchKeyword);
   };
 
   return (
     <div>
       <h1>Sport News</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Search by keyword"
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
-        />
-        <button type="submit">Search</button>
-      </form>
+      <SearchBar onSubmit={handleSearchSubmit} />
       <ul>
         {news.map((article, index) => (
           <li key={index}>

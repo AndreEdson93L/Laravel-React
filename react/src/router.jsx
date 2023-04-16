@@ -11,7 +11,7 @@ import NewsList from "./views/NewsList.jsx";
 import GuardiansNewsList from "./views/GuardiansNewsList.jsx";
 import TechnologyNewsList from "./views/TechnologyNewList.jsx";
 import ScienceNewsList from "./views/ScienceNewsList.jsx";
-import SportNewsList from "./views/SportNewsList.jsx";
+import SportNewsList from "./views/SportNewsList.jsx"
 
 const router = createBrowserRouter([
   {
