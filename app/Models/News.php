@@ -20,5 +20,9 @@ class News extends Model
         'published_at',
         'content',
     ];
-}
 
+    public function setUrlToImageAttribute($value)
+    {
+        $this->attributes['url_to_image'] = substr($value, 0, 2047);
+    }
+}

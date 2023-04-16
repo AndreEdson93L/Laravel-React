@@ -5,7 +5,7 @@ use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GuardianNewsController;
-use App\Http\Controllers\NewsController;
+use App\Http\Controllers\NewsBusiness;
 use App\Http\Controllers\NewsTechnology;
 
 /*
@@ -28,8 +28,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/users', UserController::class);
 });
 
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
+
 Route::post('/signup', [AuthController::class, 'signup']);
 Route::post('/login', [AuthController::class, 'login']);
-Route::get('/fetch-news', [NewsController::class, 'fetchNews']);
+Route::get('/fetch-news', [NewsBusiness::class, 'fetchNews']);
 Route::get('/fetch-guardians-news', [GuardianNewsController::class, 'fetchGuardiansNews']);
 Route::get('/fetch-technology-news', [NewsTechnology::class, 'fetchTechnologyNews']);

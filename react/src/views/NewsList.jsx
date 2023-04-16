@@ -1,27 +1,46 @@
-/// components/NewsList.jsx
-
 import React, { useEffect, useState } from "react";
 import axios from "../axios-client";
 
 const NewsList = () => {
   const [news, setNews] = useState([]);
+  const [keyword, setKeyword] = useState("");
+
+  const fetchNews = async () => {
+    try {
+      const response = await axios.get("/fetch-news", {
+        params: {
+          keyword: keyword.trim() === "" ? null : keyword
+        },
+      });
+      setNews(response.data.articles);
+      console.log("Fetched news:", response.data.articles);
+    } catch (error) {
+      console.error("Error fetching news:", error);
+    }
+  };
+  
 
   useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        const response = await axios.get("/fetch-news");
-        setNews(response.data.articles);
-      } catch (error) {
-        console.error("Error fetching news:", error);
-      }
-    };
-
     fetchNews();
-  }, []);
+  }, []); // Remove the dependencies to only fetch on mount
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetchNews();
+  };
 
   return (
     <div>
       <h1>Business News</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Search by keyword"
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+        />
+        <button type="submit">Search</button>
+      </form>
       <ul>
         {news.map((article, index) => (
           <li key={index}>
