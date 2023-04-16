@@ -1,13 +1,15 @@
 <?php
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\NewsApi\GuardianNewsController;
 use App\Http\Controllers\NewsApi\NewsBusiness;
 use App\Http\Controllers\NewsApi\NewsTechnology;
-
+use App\Http\Controllers\NewsApi\NewsScience;
+use App\Http\Controllers\NewsApi\NewsSport;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -37,3 +39,5 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/fetch-news', [NewsBusiness::class, 'fetchNews']);
 Route::get('/fetch-guardians-news', [GuardianNewsController::class, 'fetchGuardiansNews']);
 Route::get('/fetch-technology-news', [NewsTechnology::class, 'fetchTechnologyNews']);
+Route::get('/fetch-science-news', [NewsScience::class, 'fetchScienceNews']);
+Route::get('/fetch-sport-news', [NewsSport::class, 'fetchSportNews']);

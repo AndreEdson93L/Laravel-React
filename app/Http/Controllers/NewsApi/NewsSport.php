@@ -3,18 +3,18 @@
 namespace App\Http\Controllers\NewsApi;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use App\Models\News;
-use Illuminate\Support\Str;
 
-class NewsBusiness extends Controller
+class NewsSport extends Controller
 {
-    public function fetchNews(Request $request)
+    public function fetchSportNews(Request $request)
     {
         $client = new Client();
         $apiKey = '00d3b42d7c444ec9bd4f6577e4aa6b59';
-        $url = "https://newsapi.org/v2/top-headlines?country=de&category=business&apiKey={$apiKey}";
+        $url = "https://newsapi.org/v2/top-headlines?country=us&category=sport&apiKey={$apiKey}";
 
         $keyword = $request->input('keyword');
 
@@ -24,6 +24,8 @@ class NewsBusiness extends Controller
 
         $response = $client->get($url);
         $data = json_decode($response->getBody(), true);
+
+        //dd($data);
 
         // Iterate over each article and store it in the database
         foreach ($data['articles'] as $article) {
@@ -41,6 +43,12 @@ class NewsBusiness extends Controller
 
             $cleanUrl = $scheme . $host . $path . '?' . http_build_query($queryParams);
             $truncatedUrlToImage = Str::limit($cleanUrl, 2047);
+
+            //dd($truncatedUrlToImage);
+
+            if (strlen($article['urlToImage']) > 2047) {
+                echo "Problematic URL: " . $article['urlToImage'] . "\n";
+            }
 
             News::create([
                 'source_id' => $article['source']['id'],

@@ -29,8 +29,21 @@ class NewsTechnology extends Controller
 
         // Iterate over each article and store it in the database
         foreach ($data['articles'] as $article) {
-             // Truncate the 'url_to_image' value to a maximum of 2047 characters
-             $truncatedUrlToImage = Str::limit($article['urlToImage'], 2047);
+            
+            $parsedUrl = parse_url($article['urlToImage']);
+            $queryParams = [];
+            parse_str($parsedUrl['query'] ?? '', $queryParams);
+
+            // Remove unnecessary query parameters
+            unset($queryParams['width'], $queryParams['height'], $queryParams['auto'], $queryParams['overlay-align'], $queryParams['overlay-width'], $queryParams['overlay-base64'], $queryParams['enable']);
+
+            // Rebuild the URL
+            $scheme = isset($parsedUrl['scheme']) ? $parsedUrl['scheme'] . '://' : '';
+            $host = $parsedUrl['host'] ?? '';
+            $path = $parsedUrl['path'] ?? '';
+
+            $cleanUrl = $scheme . $host . $path . '?' . http_build_query($queryParams);
+            $truncatedUrlToImage = Str::limit($cleanUrl, 2047);
 
             News::create([
                 'source_id' => $article['source']['id'],

@@ -10,6 +10,8 @@ import UserForm from "./views/UserForm";
 import NewsList from "./views/NewsList.jsx";
 import GuardiansNewsList from "./views/GuardiansNewsList.jsx";
 import TechnologyNewsList from "./views/TechnologyNewList.jsx";
+import ScienceNewsList from "./views/ScienceNewsList.jsx";
+import SportNewsList from "./views/SportNewsList.jsx";
 
 const router = createBrowserRouter([
   {
@@ -47,7 +49,15 @@ const router = createBrowserRouter([
       {
         path: "/technology-news",
         element: <TechnologyNewsList />,
-      }
+      },
+      {
+        path: "/science-news",
+        element: <ScienceNewsList />,
+      },
+      {
+        path: "/sport-news",
+        element: <SportNewsList/>
+      }      
     ],
   },
   {

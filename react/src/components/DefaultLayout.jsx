@@ -32,9 +32,11 @@ export default function DefaultLayout() {
       <aside>
         <Link to="/dashboard">Dashboard</Link>
         <Link to="/users">Users</Link>
-        <Link to="/news">Business</Link>
+        <Link to="/news">Economy</Link>
         <Link to="/guardian-news">The Guardian</Link>
         <Link to="/technology-news">Technology</Link>
+        <Link to="/science-news">Science</Link>
+        <Link to="/sport-news">Sport</Link>
       </aside>
       <div className="content">
         <header>
