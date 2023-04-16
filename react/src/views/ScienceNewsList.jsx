@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "../axios-client";
-import SearchBar from "../components/SearchBar";
+import { useSearchContext } from "../context/SearchContext";
 
 const ScienceNewsList = () => {
   const [news, setScienceNews] = useState([]);
-  const [keyword, setKeyword] = useState("");
+  const { searchKeyword } = useSearchContext();
 
   const fetchScienceNews = async () => {
     try {
       const response = await axios.get("/fetch-science-news", {
-        //I would like to not have to repeat this logic
         params: {
-          keyword: keyword.trim() === "" ? null : keyword
+          keyword: searchKeyword?.trim() === "" ? null : searchKeyword
         },
       });
       setScienceNews(response.data.articles);
@@ -22,16 +21,11 @@ const ScienceNewsList = () => {
 
   useEffect(() => {
     fetchScienceNews();
-  }, [keyword]); // Add keyword as a dependency to refetch news when keyword changes
-
-  const handleSearch = (searchKeyword) => {
-    setKeyword(searchKeyword);
-  };
+  }, [searchKeyword]);
 
   return (
     <div>
       <h1>Science News</h1>
-      <SearchBar onSubmit={handleSearch} />
       <ul>
         {news.map((article, index) => (
           <li key={index}>

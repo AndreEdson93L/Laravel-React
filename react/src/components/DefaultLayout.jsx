@@ -4,9 +4,13 @@ import axiosClient from "../axios-client.js";
 import { useEffect } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import SearchBar from "./SearchBar";
+// DefaultLayout.jsx
+import { useSearchContext } from "../context/SearchContext";
 
 export default function DefaultLayout() {
   const { user, token, setUser, setToken, notification } = useStateContext();
+  const { setSearchKeyword } = useSearchContext();
 
   if (!token) {
     return <Navigate to="/login" />;
@@ -26,6 +30,10 @@ export default function DefaultLayout() {
       setUser(data);
     });
   }, []);
+
+  const handleSearch = (searchKeyword) => {
+    setSearchKeyword(searchKeyword);
+  };
 
   return (
     <div id="defaultLayout">
@@ -54,7 +62,7 @@ export default function DefaultLayout() {
                 Sport
               </Nav.Link>
             </Nav>
-            {/*I would like to have here the search bar*/}
+            <SearchBar onSubmit={setSearchKeyword} />
           </Navbar.Collapse>
         </Container>
       </Navbar>

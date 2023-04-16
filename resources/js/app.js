@@ -1,11 +1,16 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import router from "./router";
+import DefaultLayout from "./components/DefaultLayout";
+import { SearchProvider } from "./context/SearchContext";
 
 function App() {
   return (
     <Router>
-      <Routes>{router}</Routes>
+      <SearchProvider>
+        <Routes>
+          <Route path="/" element={<DefaultLayout />} />
+        </Routes>
+      </SearchProvider>
     </Router>
   );
 }
