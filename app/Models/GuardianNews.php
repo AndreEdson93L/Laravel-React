@@ -22,4 +22,5 @@ class GuardianNews extends Model
         'pillar_id',
         'pillar_name',
     ];
+    
 }

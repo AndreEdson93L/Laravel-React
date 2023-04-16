@@ -9,7 +9,7 @@ const NewsList = () => {
     try {
       const response = await axios.get("/fetch-news", {
         params: {
-          keyword: keyword.trim() === "" ? null : keyword
+          keyword: keyword.trim() === "" ? null : keyword,
         },
       });
       setNews(response.data.articles);

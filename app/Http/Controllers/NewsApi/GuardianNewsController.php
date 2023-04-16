@@ -9,11 +9,17 @@ use App\Models\GuardianNews;
 
 class GuardianNewsController extends Controller
 {
-    public function fetchGuardiansNews()
+    public function fetchGuardiansNews(Request $request)
     {
         $client = new Client();
         $apiKey = '215aedc0-abe0-456e-a004-0a70201675dc';
         $url = "https://content.guardianapis.com/search?tag=environment/recycling&api-key={$apiKey}";
+
+        $keyword = $request->input('keyword');
+
+        if (!empty($keyword)) {
+            $url .= "&q=" . urlencode($keyword);
+        }
 
         $response = $client->get($url);
         $data = json_decode($response->getBody(), true);
