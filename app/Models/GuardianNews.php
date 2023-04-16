@@ -22,5 +22,6 @@ class GuardianNews extends Model
         'pillar_id',
         'pillar_name',
     ];
-    
+
+    protected $table = 'guardian_news';
 }
