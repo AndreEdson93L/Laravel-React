@@ -1,5 +1,15 @@
+// components/GuardiansNewsList.jsx
 import React, { useEffect, useState } from "react";
 import axios from "../axios-client";
+import {
+  Card,
+  Container,
+  FormControl,
+  InputGroup,
+  ListGroup,
+  Row,
+  Col,
+} from "react-bootstrap";
 
 const GuardiansNewsList = () => {
   const [guardianNews, setGuardianNews] = useState([]);
@@ -21,38 +31,54 @@ const GuardiansNewsList = () => {
 
   useEffect(() => {
     fetchGuardianNews();
-  }, []); // Remove the dependencies to only fetch on mount
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    fetchGuardianNews();
-  };
+  }, [keyword]);
 
   return (
-    <div>
-      <h1>Guardian News</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Search by keyword"
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
-        />
-        <button type="submit">Search</button>
-      </form>
-      <ul>
+    <Container>
+      <Row className="justify-content-center text-center">
+        <h1>The Guardian</h1>
+      </Row>
+      <Row>
+        <Col md={{ span: 8, offset: 2 }}>
+          <InputGroup>
+            <FormControl
+              type="text"
+              placeholder="Search by keyword"
+              value={keyword}
+              onChange={(e) => setKeyword(e.target.value)}
+            />
+          </InputGroup>
+        </Col>
+      </Row>
+      <ListGroup>
         {guardianNews.map((article, index) => (
-          <li key={index}>
-            <h3>{article.webTitle}</h3>
-            <p>Section: {article.sectionName}</p>
-            <p>Published at: {article.webPublicationDate}</p>
-            <a href={article.webUrl} target="_blank" rel="noreferrer">
-              Read more
-            </a>
-          </li>
+          <ListGroup.Item key={index} style={{ border: "none" }}>
+            <Row>
+              <Col md={{ span: 8, offset: 2 }}>
+                <Card>
+                  <Card.Body>
+                    <Card.Title>{article.webTitle}</Card.Title>
+                    <Card.Subtitle className="mb-2 text-muted">
+                      Section: {article.sectionName}
+                    </Card.Subtitle>
+                    <Card.Text>
+                      Published at: {article.webPublicationDate}
+                    </Card.Text>
+                    <Card.Link
+                      href={article.webUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Read more
+                    </Card.Link>
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Row>
+          </ListGroup.Item>
         ))}
-      </ul>
-    </div>
+      </ListGroup>
+    </Container>
   );
 };
 
