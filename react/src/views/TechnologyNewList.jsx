@@ -30,12 +30,7 @@ const TechnologyNewsList = () => {
 
   useEffect(() => {
     fetchTechnologyNews();
-  }, []);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    fetchTechnologyNews();
-  };
+  }, [keyword]);
 
   return (
     <Container>
