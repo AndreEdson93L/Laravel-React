@@ -1,16 +1,12 @@
-import { Link, Navigate, Outlet } from "react-router-dom";
+import React, { useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import { Navbar, Container, Nav } from "react-bootstrap";
 import { useStateContext } from "../context/ContextProvider";
 import axiosClient from "../axios-client.js";
-import { useEffect } from "react";
-import { Navbar, Container, Nav } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
-import SearchBar from "./SearchBar";
-// DefaultLayout.jsx
-import { useSearchContext } from "../context/SearchContext";
+import { Navigate, Outlet } from "react-router-dom";
 
 export default function DefaultLayout() {
   const { user, token, setUser, setToken, notification } = useStateContext();
-  const { setSearchKeyword } = useSearchContext();
 
   if (!token) {
     return <Navigate to="/login" />;
@@ -30,10 +26,6 @@ export default function DefaultLayout() {
       setUser(data);
     });
   }, []);
-
-  const handleSearch = (searchKeyword) => {
-    setSearchKeyword(searchKeyword);
-  };
 
   return (
     <div id="defaultLayout">
@@ -61,8 +53,16 @@ export default function DefaultLayout() {
               <Nav.Link as={NavLink} to="/sport-news">
                 Sport
               </Nav.Link>
+              <Nav.Item>
+                <button
+                  className="btn btn-link nav-link"
+                  style={{ padding: "0.5rem 1rem" }}
+                  onClick={onLogout}
+                >
+                  Logout
+                </button>
+              </Nav.Item>
             </Nav>
-            <SearchBar onSubmit={setSearchKeyword} />
           </Navbar.Collapse>
         </Container>
       </Navbar>
@@ -72,4 +72,3 @@ export default function DefaultLayout() {
     </div>
   );
 }
-

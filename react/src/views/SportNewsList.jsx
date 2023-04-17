@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "../axios-client";
-import SearchBar from "../components/SearchBar";
 
 const SportNewsList = () => {
-  const [news, setSportNews] = useState([]);
+  const [sportNews, setSportNews] = useState([]);
+  const [keyword, setKeyword] = useState("");
 
-  const fetchSportNews = async (keyword = "") => {
+  const fetchSportNews = async () => {
     try {
       const response = await axios.get("/fetch-sport-news", {
         params: {
@@ -20,18 +20,27 @@ const SportNewsList = () => {
 
   useEffect(() => {
     fetchSportNews();
-  }, []);
+  }, [keyword]);
 
-  const handleSearchSubmit = (searchKeyword) => {
-    fetchSportNews(searchKeyword);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetchSportNews();
   };
 
   return (
     <div>
       <h1>Sport News</h1>
-      <SearchBar onSubmit={handleSearchSubmit} />
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Search by keyword"
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+        />
+        <button type="submit">Search</button>
+      </form>
       <ul>
-        {news.map((article, index) => (
+        {sportNews.map((article, index) => (
           <li key={index}>
             <h3>{article.title}</h3>
             <p>Author: {article.author}</p>

@@ -1,16 +1,16 @@
+// components/ScienceNewsList.jsx
 import React, { useEffect, useState } from "react";
 import axios from "../axios-client";
-import { useSearchContext } from "../context/SearchContext";
 
 const ScienceNewsList = () => {
   const [news, setScienceNews] = useState([]);
-  const { searchKeyword } = useSearchContext();
+  const [keyword, setKeyword] = useState("");
 
   const fetchScienceNews = async () => {
     try {
       const response = await axios.get("/fetch-science-news", {
         params: {
-          keyword: searchKeyword?.trim() === "" ? null : searchKeyword
+          keyword: keyword.trim() === "" ? null : keyword
         },
       });
       setScienceNews(response.data.articles);
@@ -21,11 +21,25 @@ const ScienceNewsList = () => {
 
   useEffect(() => {
     fetchScienceNews();
-  }, [searchKeyword]);
+  }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetchScienceNews();
+  };
 
   return (
     <div>
       <h1>Science News</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Search by keyword"
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+        />
+        <button type="submit">Search</button>
+      </form>
       <ul>
         {news.map((article, index) => (
           <li key={index}>
