@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axiosClient from "../axios-client.js";
+import "../index.css";
 import { Link } from "react-router-dom";
 import { useStateContext } from "../context/ContextProvider.jsx";
 import { Button, Card, Table, Container, Row, Col } from "react-bootstrap";
@@ -40,7 +41,7 @@ export default function Users() {
     <Container style={{ marginTop: "2rem" }}>
       <Row className="justify-content-center text-center mx-auto">
         <Col>
-          <h1>Users</h1>
+          <h1 className="title-views">Users</h1>
         </Col>
         <Col>
           <Link className="btn btn-primary" to="/users/new">

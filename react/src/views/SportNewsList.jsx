@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "../axios-client";
+import "../index.css";
 import {
   Card,
   Container,
@@ -34,7 +35,7 @@ const SportNewsList = () => {
   return (
     <Container>
       <Row className="justify-content-center text-center">
-        <h1>Sport News</h1>
+        <h1 className="title-views">Sport News</h1>
       </Row>
       <Row>
         <Col md={{ span: 8, offset: 2 }}>

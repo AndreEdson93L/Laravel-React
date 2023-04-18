@@ -1,6 +1,7 @@
 // components/GuardiansNewsList.jsx
 import React, { useEffect, useState } from "react";
 import axios from "../axios-client";
+import "../index.css";
 import {
   Card,
   Container,
@@ -36,7 +37,7 @@ const GuardiansNewsList = () => {
   return (
     <Container>
       <Row className="justify-content-center text-center">
-        <h1>The Guardian</h1>
+        <h1 className="title-views">The Guardian</h1>
       </Row>
       <Row>
         <Col md={{ span: 8, offset: 2 }}>
@@ -50,7 +51,13 @@ const GuardiansNewsList = () => {
           </InputGroup>
         </Col>
       </Row>
-      <ListGroup>
+      <ListGroup
+        style={{
+          backgroundColor: "transparent",
+          border: "none",
+          boxShadow: "none",
+        }}
+      >
         {guardianNews.map((article, index) => (
           <ListGroup.Item key={index} style={{ border: "none" }}>
             <Row>

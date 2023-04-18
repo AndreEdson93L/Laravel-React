@@ -1,6 +1,6 @@
-// components/TechnologyNewsList.jsx
 import React, { useEffect, useState } from "react";
 import axios from "../axios-client";
+import "../index.css";
 import {
   Card,
   Container,
@@ -35,7 +35,7 @@ const TechnologyNewsList = () => {
   return (
     <Container>
       <Row className="justify-content-center text-center">
-        <h1>Technology</h1>
+        <h1 className="title-views">Technology</h1>
       </Row>
       <Row>
         <Col md={{ span: 8, offset: 2 }}>

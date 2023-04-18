@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axiosClient from "../axios-client.js";
+import "../index.css";
 import { useStateContext } from "../context/ContextProvider.jsx";
 import { Container, Row, Col, Card, Form, Button, Alert } from "react-bootstrap";
 
@@ -68,7 +69,7 @@ export default function UserForm() {
     <Container className="my-4">
       <Row className="justify-content-center">
         <Col md={6}>
-          <h1 className="text-center mb-3">{user.id ? `Update User: ${user.name}` : 'New User'}</h1>
+          <h1 className="text-center mb-3 title-views">{user.id ? `Update User: ${user.name}` : 'New User'}</h1>
           <Card>
             <Card.Body>
               {loading && <div className="text-center">Loading...</div>}
