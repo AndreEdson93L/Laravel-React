@@ -1,4 +1,3 @@
-
 import axiosClient from "../axios-client.js";
 import "../index.css";
 import { Link } from "react-router-dom";
@@ -46,7 +45,7 @@ export default function Login() {
     <Container className="my-4">
       <Row className="justify-content-center">
         <Col md={6}>
-          <h1 className="text-center mb-3 login-sign-up">App News</h1>
+          <h1 className="text-center mb-3 urban-street">App News</h1>
           <p className="text-center mb-4">
             Search your favorite articles in science, technology, and more.
           </p>

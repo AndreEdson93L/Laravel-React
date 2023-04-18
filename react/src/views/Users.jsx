@@ -49,7 +49,7 @@ export default function Users() {
           </Link>
         </Col>
       </Row>
-      <Card className="animated fadeInDown">
+      <Card className="animated fadeInDown font-news">
         <Table responsive>
           <thead>
             <tr>

@@ -65,7 +65,7 @@ const GuardiansNewsList = () => {
                 <Card>
                   <Card.Body>
                     <Card.Title>{article.webTitle}</Card.Title>
-                    <Card.Subtitle className="mb-2 text-muted">
+                    <Card.Subtitle className="mb-2 text-muted font-news">
                       Section: {article.sectionName}
                     </Card.Subtitle>
                     <Card.Text>

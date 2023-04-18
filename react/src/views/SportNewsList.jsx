@@ -57,7 +57,7 @@ const SportNewsList = () => {
                 <Card>
                   <Card.Body>
                     <Card.Title>{article.title}</Card.Title>
-                    <Card.Subtitle className="mb-2 text-muted">
+                    <Card.Subtitle className="mb-2 text-muted font-news">
                       Author: {article.author}
                     </Card.Subtitle>
                     <Card.Text>Published at: {article.publishedAt}</Card.Text>

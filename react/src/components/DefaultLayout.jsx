@@ -31,10 +31,10 @@ export default function DefaultLayout() {
     <div id="defaultLayout">
       <Navbar bg="light" expand="lg">
         <Container>
-          <Navbar.Brand href="/">News App</Navbar.Brand>
+          <Navbar.Brand href="/" className="urban-street">News App</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
+            <Nav className="me-auto nav-bar-style">
               <Nav.Link as={NavLink} to="/users">
                 Users
               </Nav.Link>
