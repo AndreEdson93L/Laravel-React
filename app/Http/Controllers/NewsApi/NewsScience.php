@@ -13,7 +13,7 @@ class NewsScience extends Controller
     public function fetchScienceNews(Request $request)
     {
         $client = new Client();
-        $apiKey = '00d3b42d7c444ec9bd4f6577e4aa6b59';
+        $apiKey = config('api_keys.open_news');
         $url = "https://newsapi.org/v2/top-headlines?country=us&category=science&apiKey={$apiKey}";
 
         $keyword = $request->input('keyword');

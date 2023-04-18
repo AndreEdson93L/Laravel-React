@@ -12,7 +12,7 @@ class GuardianNewsController extends Controller
     public function fetchGuardiansNews(Request $request)
     {
         $client = new Client();
-        $apiKey = config('guardian.api_key');
+        $apiKey = config('api_keys.guardian');
         $url = "https://content.guardianapis.com/search?tag=environment/recycling&api-key={$apiKey}";
 
         $keyword = $request->input('keyword');

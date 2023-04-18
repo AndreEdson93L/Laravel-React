@@ -34,7 +34,7 @@ const NewsList = () => {
   return(
   <Container>
       <Row className="justify-content-center text-center">
-        <h1>Sport News</h1>
+        <h1>Economy</h1>
       </Row>
       <Row>
         <Col md={{ span: 8, offset: 2 }}>
